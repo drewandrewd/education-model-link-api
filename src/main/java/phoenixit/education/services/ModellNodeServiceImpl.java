@@ -19,6 +19,7 @@ public class ModellNodeServiceImpl implements ModelNodeService {
         ModelNode model = converter.classToModel(classNode);
         model.setId(classNode.getId());
         model.setTitle(classNode.getTitle());
+        repository.save(model);
         return model;
     }
 
