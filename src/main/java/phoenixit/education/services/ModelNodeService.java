@@ -1,15 +1,14 @@
 package phoenixit.education.services;
 
-import phoenixit.education.models.ClassNode;
+import phoenixit.education.exceptions.NodeNotFoundException;
 import phoenixit.education.models.ModelNode;
 
-import java.util.concurrent.atomic.AtomicReference;
 
 public interface ModelNodeService {
 
-    ModelNode create(ClassNode classNode);
+    ModelNode create(ModelNode modelNode);
 
-    AtomicReference<ModelNode> update(ClassNode modelRequest);
+    ModelNode update(ModelNode modelNode) throws NodeNotFoundException;
 
     ModelNode delete(Long id);
 }
