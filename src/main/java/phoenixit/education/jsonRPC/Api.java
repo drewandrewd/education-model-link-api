@@ -10,6 +10,8 @@ import phoenixit.education.models.ModelNode;
 
 @JsonRpcService("/api/v1/model.json")
 public interface Api {
+    //todo clear code
+    //todo change get model in create and update for ModelNode
 
     @PutMapping
     ClassNode create(@JsonRpcParam(value = "classNode") ClassNode classNode);

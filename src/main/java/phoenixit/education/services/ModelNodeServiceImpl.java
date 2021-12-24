@@ -13,17 +13,24 @@ public class ModelNodeServiceImpl implements ModelNodeService {
 
     private ModelRepository repository;
 
+    //todo findById
+
     @Override
     public ModelNode create(ModelNode modelNode) {
+        //todo add model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
+        //todo find classNode by classNodeId -> set classnode to modelnode and save
         return repository.save(modelNode);
     }
 
     @Override
     public ModelNode update(ModelNode modelNode) throws NodeNotFoundException {
+        //todo get model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
         Optional<ModelNode> current = repository.findById(modelNode.getId());
         String newTitle = modelNode.getTitle();
+        //todo find classNode by classNodeId, check and compare with old value -> change if it different
         ClassNode newClassNode = modelNode.getClassNode();
         if (current.isPresent()) {
+            //todo classNode.isPresent check
             ModelNode oldModel = current.get();
             if (!newTitle.equals(oldModel.getTitle())) {
                 oldModel.setTitle(newTitle);
@@ -38,9 +45,9 @@ public class ModelNodeServiceImpl implements ModelNodeService {
     }
 
     @Override
-    public ModelNode delete(Long id) {
+    public ModelNode delete(Long id) throws NodeNotFoundException {
         Optional<ModelNode> modelNode = repository.findById(id);
-        repository.delete(modelNode.get());
+        repository.delete(modelNode.orElseThrow(NodeNotFoundException::new));
         return modelNode.get();
     }
 

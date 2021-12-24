@@ -12,5 +12,5 @@ public interface ModelNodeService {
 
     ModelNode update(ModelNode modelNode) throws NodeNotFoundException;
 
-    ModelNode delete(Long id);
+    ModelNode delete(Long id) throws NodeNotFoundException;
 }

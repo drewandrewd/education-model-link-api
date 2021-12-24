@@ -12,6 +12,8 @@ public class ClassNodeServiceImpl implements ClassNodeService {
 
     private ClassRepository repository;
 
+    //todo findById
+
     @Override
     public ClassNode create(ClassNode classNode) {
         return repository.save(classNode);
@@ -35,6 +37,7 @@ public class ClassNodeServiceImpl implements ClassNodeService {
     @Override
     public ClassNode delete(Long id) {
         Optional<ClassNode> classNode = repository.findById(id);
+        //todo classNode.isPresent check
         repository.delete(classNode.get());
         return classNode.get();
     }
