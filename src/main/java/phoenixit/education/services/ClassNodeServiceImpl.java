@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class ClassNodeServiceImpl implements ClassNodeService {
 
-    ClassRepository repository;
+    private ClassRepository repository;
 
     @Override
     public ClassNode create(ClassNode classNode) {
@@ -40,7 +40,7 @@ public class ClassNodeServiceImpl implements ClassNodeService {
     }
 
     @Autowired
-    public ClassNodeServiceImpl(ClassRepository repository) {
+    public void setRepository(ClassRepository repository) {
         this.repository = repository;
     }
 }
