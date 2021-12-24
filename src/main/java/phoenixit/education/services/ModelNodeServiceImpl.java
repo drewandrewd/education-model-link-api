@@ -2,6 +2,7 @@ package phoenixit.education.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import phoenixit.education.exceptions.NodeNotFoundException;
+import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelNode;
 import phoenixit.education.repositories.ModelRepository;
 
@@ -21,10 +22,14 @@ public class ModelNodeServiceImpl implements ModelNodeService {
     public ModelNode update(ModelNode modelNode) throws NodeNotFoundException {
         Optional<ModelNode> current = repository.findById(modelNode.getId());
         String newTitle = modelNode.getTitle();
+        ClassNode newClassNode = modelNode.getClassNode();
         if (current.isPresent()) {
             ModelNode oldModel = current.get();
             if (!newTitle.equals(oldModel.getTitle())) {
                 oldModel.setTitle(newTitle);
+            }
+            if (!newClassNode.equals(oldModel.getClassNode())) {
+                oldModel.setClassNode(newClassNode);
             }
             return oldModel;
         } else {
