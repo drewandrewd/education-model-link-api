@@ -1,9 +1,12 @@
 package phoenixit.education.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import phoenixit.education.exceptions.NodeNotFoundException;
+import phoenixit.education.exceptions.ClassNodeNotFoundException;
+import phoenixit.education.exceptions.ModelNodeNotFoundException;
 import phoenixit.education.models.ClassNode;
+import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
+import phoenixit.education.repositories.ClassRepository;
 import phoenixit.education.repositories.ModelRepository;
 
 import java.util.Optional;
@@ -11,48 +14,67 @@ import java.util.Optional;
 
 public class ModelNodeServiceImpl implements ModelNodeService {
 
-    private ModelRepository repository;
-
-    //todo findById
+    private ModelRepository modelRepository;
+    private ClassRepository classRepository;
 
     @Override
-    public ModelNode create(ModelNode modelNode) {
-        //todo add model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
-        //todo find classNode by classNodeId -> set classnode to modelnode and save
-        return repository.save(modelNode);
+    public ModelNode findById(ModelLinkMessage modelLinkMessage) {
+        return null;
     }
 
     @Override
-    public ModelNode update(ModelNode modelNode) throws NodeNotFoundException {
-        //todo get model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
-        Optional<ModelNode> current = repository.findById(modelNode.getId());
-        String newTitle = modelNode.getTitle();
-        //todo find classNode by classNodeId, check and compare with old value -> change if it different
-        ClassNode newClassNode = modelNode.getClassNode();
-        if (current.isPresent()) {
-            //todo classNode.isPresent check
-            ModelNode oldModel = current.get();
-            if (!newTitle.equals(oldModel.getTitle())) {
-                oldModel.setTitle(newTitle);
-            }
-            if (!newClassNode.equals(oldModel.getClassNode())) {
-                oldModel.setClassNode(newClassNode);
-            }
-            return oldModel;
+    public ModelNode create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException {
+        //todo add model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
+        //todo find classNode by classNodeId -> set classnode to modelnode and save
+        Optional<ClassNode> classNode = classRepository.findById(modelLinkMessage.getClassNodeId());
+        if (classNode.isPresent()) {
+            return modelRepository.save(new ModelNode(modelLinkMessage.getModelNodeId(), modelLinkMessage.getModelNodeTitle(), classNode.get()));
         } else {
-            throw new NodeNotFoundException();
+            throw new ClassNodeNotFoundException();
         }
     }
 
     @Override
-    public ModelNode delete(Long id) throws NodeNotFoundException {
-        Optional<ModelNode> modelNode = repository.findById(id);
-        repository.delete(modelNode.orElseThrow(NodeNotFoundException::new));
+    public ModelNode update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException {
+        //todo get model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
+        Optional<ModelNode> current = modelRepository.findById(modelLinkMessage.getModelNodeId());
+        String newTitle = modelLinkMessage.getModelNodeTitle();
+        Long newClassNodeId = modelLinkMessage.getClassNodeId();
+        //todo find classNode by classNodeId, check and compare with old value -> change if it different
+        if (current.isPresent()) {
+            //todo classNode.isPresent check
+            ModelNode oldModel = current.get();
+            Optional<ClassNode> newClassNode = classRepository.findById(newClassNodeId);
+            if (!newTitle.equals(oldModel.getTitle())) {
+                oldModel.setTitle(newTitle);
+            }
+            if (newClassNode.isPresent()) {
+                if (newClassNodeId != oldModel.getClassNode().getId()) {
+                    oldModel.setClassNode(newClassNode.get());
+                }
+            } else {
+                throw new ClassNodeNotFoundException();
+            }
+            return oldModel;
+        } else {
+            throw new ModelNodeNotFoundException();
+        }
+    }
+
+    @Override
+    public ModelNode delete(Long id) throws ModelNodeNotFoundException {
+        Optional<ModelNode> modelNode = modelRepository.findById(id);
+        modelRepository.delete(modelNode.orElseThrow(ModelNodeNotFoundException::new));
         return modelNode.get();
     }
 
     @Autowired
-    public void setRepository(ModelRepository repository) {
-        this.repository = repository;
+    public void setModelRepository(ModelRepository modelRepository) {
+        this.modelRepository = modelRepository;
+    }
+
+    @Autowired
+    public void setClassRepository(ClassRepository classRepository) {
+        this.classRepository = classRepository;
     }
 }

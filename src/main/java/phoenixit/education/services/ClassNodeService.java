@@ -1,14 +1,17 @@
 package phoenixit.education.services;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import phoenixit.education.exceptions.NodeNotFoundException;
+import org.springframework.stereotype.Service;
+import phoenixit.education.exceptions.ClassNodeNotFoundException;
 import phoenixit.education.models.ClassNode;
 
+@Service
 public interface ClassNodeService {
+
+    ClassNode findById(Long id) throws ClassNodeNotFoundException;
 
     ClassNode create(ClassNode classNode);
 
-    ClassNode update(ClassNode classNode) throws NodeNotFoundException;
+    ClassNode update(ClassNode classNode) throws ClassNodeNotFoundException;
 
-    ClassNode delete(Long id);
+    ClassNode delete(Long id) throws ClassNodeNotFoundException;
 }
