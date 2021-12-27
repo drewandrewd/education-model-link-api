@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
 import phoenixit.education.models.ClassNode;
 
-@Service
 public interface ClassNodeService {
 
     ClassNode findById(Long id) throws ClassNodeNotFoundException;

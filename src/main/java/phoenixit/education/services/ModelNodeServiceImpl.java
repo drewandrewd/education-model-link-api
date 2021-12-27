@@ -1,6 +1,7 @@
 package phoenixit.education.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
 import phoenixit.education.exceptions.ModelNodeNotFoundException;
 import phoenixit.education.models.ClassNode;
@@ -11,7 +12,7 @@ import phoenixit.education.repositories.ModelRepository;
 
 import java.util.Optional;
 
-
+@Service
 public class ModelNodeServiceImpl implements ModelNodeService {
 
     private ModelRepository modelRepository;
