@@ -7,7 +7,6 @@ import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
 
-@Service
 public interface ModelNodeService {
 
     ModelNode findById(ModelLinkMessage modelLinkMessage);

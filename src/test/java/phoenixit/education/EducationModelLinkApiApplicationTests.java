@@ -24,17 +24,17 @@ class EducationModelLinkApiApplicationTests {
 	}
 
 //	@Test
-	void createTest() throws ClassNodeNotFoundException {
-		ClassNode classNode = new ClassNode();
-		classNode.setId(777L);
-		classNode.setTitle("New Title");
-		//classNodeService.create(classNode);
-		ModelLinkMessage modelLinkMessage = new ModelLinkMessage();
-		modelLinkMessage.setModelNodeId(55L);
-		modelLinkMessage.setModelNodeTitle("TTT");
-		modelLinkMessage.setClassNodeId(classNode.getId());
-		//modelNodeService.create(modelLinkMessage);
-	}
+//	void createTest() throws ClassNodeNotFoundException {
+//		ClassNode classNode = new ClassNode();
+//		classNode.setId(777L);
+//		classNode.setTitle("New Title");
+//		//classNodeService.create(classNode);
+//		ModelLinkMessage modelLinkMessage = new ModelLinkMessage();
+//		modelLinkMessage.setModelNodeId(55L);
+//		modelLinkMessage.setModelNodeTitle("TTT");
+//		modelLinkMessage.setClassNodeId(classNode.getId());
+//		//modelNodeService.create(modelLinkMessage);
+//	}
 
 //	@Autowired
 //	public void setModelNodeService(ModelNodeService modelNodeService) {
