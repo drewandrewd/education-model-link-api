@@ -49,12 +49,12 @@ public class ApiImpl implements Api{
     }
 
     @Autowired
-    public ModelNodeService setModelNodeService() {
-        return modelNodeService;
+    public void setModelNodeService(ModelNodeService modelNodeService) {
+        this.modelNodeService = modelNodeService;
     }
 
     @Autowired
-    public ClassNodeService setClassNodeService() {
-        return classNodeService;
+    public void setClassNodeService(ClassNodeService classNodeService) {
+        this.classNodeService = classNodeService;
     }
 }
