@@ -59,7 +59,7 @@ public class ModelNodeServiceImpl implements ModelNodeService {
             } else {
                 throw new ClassNodeNotFoundException();
             }
-            return oldModel;
+            return modelRepository.save(oldModel);
         } else {
             throw new ModelNodeNotFoundException();
         }
