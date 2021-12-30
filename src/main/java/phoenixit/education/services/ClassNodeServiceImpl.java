@@ -18,7 +18,7 @@ public class ClassNodeServiceImpl implements ClassNodeService {
     public ClassNode findById(Long id) throws ClassNodeNotFoundException {
         Optional<ClassNode> classNode = repository.findById(id);
         if (classNode.isPresent()) {
-            return classNode.get();
+            return repository.save(classNode.get());
         } else {
             throw new ClassNodeNotFoundException();
         }
@@ -38,12 +38,12 @@ public class ClassNodeServiceImpl implements ClassNodeService {
             if (!newTitle.equals(oldModel.getTitle())) {
                 oldModel.setTitle(newTitle);
             }
-            return oldModel;
+            return repository.save(oldModel);
         } else {
             throw new ClassNodeNotFoundException();
         }
     }
-
+    //
     @Override
     public ClassNode delete(Long id) throws ClassNodeNotFoundException {
         Optional<ClassNode> classNode = repository.findById(id);

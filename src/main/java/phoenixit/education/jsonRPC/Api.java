@@ -8,7 +8,7 @@ import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
 
-@JsonRpcService("/api/v1/model.json")
+@JsonRpcService("/api/v1/modelLink.json")
 public interface Api {
     //todo clear code
     //todo change get model in create and update for ModelNode
