@@ -7,13 +7,13 @@ import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
 
-public interface ModelNodeService {
+public interface  ModelNodeService {
 
     ModelNode findById(ModelLinkMessage modelLinkMessage);
 
-    ModelNode create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException;
+    Long create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException;
 
-    ModelNode update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException;
+    void update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException;
 
-    ModelNode delete(Long id) throws ModelNodeNotFoundException;
+    void delete(Long id) throws ModelNodeNotFoundException;
 }

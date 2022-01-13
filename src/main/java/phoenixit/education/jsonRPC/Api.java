@@ -19,9 +19,9 @@ public interface Api {
 
     ClassNode classDelete(@JsonRpcParam(value = "classId") Long id) throws ClassNodeNotFoundException;
 
-    ModelNode create(@JsonRpcParam(value = "modelLink") ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException;
+    Long create(@JsonRpcParam(value = "modelLink") ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException;
 
-    ModelNode update(@JsonRpcParam(value = "modelLink") ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException;
+    void update(@JsonRpcParam(value = "modelLink") ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException;
 
-    ModelNode modelDelete(@JsonRpcParam(value = "modelId") Long id) throws ModelNodeNotFoundException;
+    void modelDelete(@JsonRpcParam(value = "modelId") Long id) throws ModelNodeNotFoundException;
 }

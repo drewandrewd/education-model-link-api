@@ -24,7 +24,7 @@ public class ModelNodeServiceImpl implements ModelNodeService {
     }
 
     @Override
-    public ModelNode create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException {
+    public Long create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException {
         //todo add model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
         //todo find classNode by classNodeId -> set classnode to modelnode and save
         Optional<ClassNode> classNode = classRepository.findById(modelLinkMessage.getClassNodeId());
@@ -32,14 +32,15 @@ public class ModelNodeServiceImpl implements ModelNodeService {
             ModelNode modelNode = new ModelNode();
             modelNode.setTitle(modelLinkMessage.getModelNodeTitle());
             modelNode.setClassNode(classNode.get());
-            return modelRepository.save(modelNode);
+            modelRepository.save(modelNode);
+            return modelLinkMessage.getModelNodeId();
         } else {
             throw new ClassNodeNotFoundException();
         }
     }
 
     @Override
-    public ModelNode update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException {
+    public void update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException {
         //todo get model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
         Optional<ModelNode> current = modelRepository.findById(modelLinkMessage.getModelNodeId());
         String newTitle = modelLinkMessage.getModelNodeTitle();
@@ -59,17 +60,16 @@ public class ModelNodeServiceImpl implements ModelNodeService {
             } else {
                 throw new ClassNodeNotFoundException();
             }
-            return modelRepository.save(oldModel);
+            modelRepository.save(oldModel);
         } else {
             throw new ModelNodeNotFoundException();
         }
     }
 
     @Override
-    public ModelNode delete(Long id) throws ModelNodeNotFoundException {
+    public void delete(Long id) throws ModelNodeNotFoundException {
         Optional<ModelNode> modelNode = modelRepository.findById(id);
         modelRepository.delete(modelNode.orElseThrow(ModelNodeNotFoundException::new));
-        return modelNode.get();
     }
 
     @Autowired

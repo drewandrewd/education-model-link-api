@@ -34,18 +34,18 @@ public class ApiImpl implements Api{
     }
 
     @Override
-    public ModelNode create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException {
+    public Long create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException {
         return modelNodeService.create(modelLinkMessage);
     }
 
     @Override
-    public ModelNode update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException {
-        return modelNodeService.update(modelLinkMessage);
+    public void update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException {
+        modelNodeService.update(modelLinkMessage);
     }
 
     @Override
-    public ModelNode modelDelete(Long id) throws ModelNodeNotFoundException {
-        return modelNodeService.delete(id);
+    public void modelDelete(Long id) throws ModelNodeNotFoundException {
+        modelNodeService.delete(id);
     }
 
     @Autowired
