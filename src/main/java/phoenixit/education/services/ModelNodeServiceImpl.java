@@ -33,7 +33,7 @@ public class ModelNodeServiceImpl implements ModelNodeService {
             modelNode.setTitle(modelLinkMessage.getModelNodeTitle());
             modelNode.setClassNode(classNode.get());
             modelRepository.save(modelNode);
-            return modelLinkMessage.getModelNodeId();
+            return modelNode.getId();
         } else {
             throw new ClassNodeNotFoundException();
         }
