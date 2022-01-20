@@ -1,6 +1,5 @@
 package phoenixit.education.services;
 
-import org.springframework.stereotype.Service;
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
 import phoenixit.education.models.ClassNode;
 
@@ -13,4 +12,6 @@ public interface ClassNodeService {
     ClassNode update(ClassNode classNode) throws ClassNodeNotFoundException;
 
     ClassNode delete(Long id) throws ClassNodeNotFoundException;
+
+    boolean fetchByNodeId(Long id) throws ClassNodeNotFoundException;
 }

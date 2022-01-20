@@ -11,6 +11,8 @@ import phoenixit.education.models.ModelNode;
 import phoenixit.education.services.ClassNodeService;
 import phoenixit.education.services.ModelNodeService;
 
+import java.util.List;
+
 @Service
 @AutoJsonRpcServiceImpl
 public class ApiImpl implements Api{
@@ -46,6 +48,21 @@ public class ApiImpl implements Api{
     @Override
     public void modelDelete(Long id) throws ModelNodeNotFoundException {
         modelNodeService.delete(id);
+    }
+
+    @Override
+    public boolean fetchByClassNodeId(Long id) throws ClassNodeNotFoundException {
+        return classNodeService.fetchByNodeId(id);
+    }
+
+    @Override
+    public boolean fetchByModelNodeId(Long id) throws ModelNodeNotFoundException {
+        return modelNodeService.fetchByNodeId(id);
+    }
+
+    @Override
+    public List<Long> fetchModelsByClassNodeId(Long id) throws ClassNodeNotFoundException {
+        return modelNodeService.fetchModelsByClassNodeId(id);
     }
 
     @Autowired

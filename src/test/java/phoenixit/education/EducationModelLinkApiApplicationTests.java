@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
+import phoenixit.education.exceptions.ModelNodeNotFoundException;
 import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
@@ -12,12 +13,14 @@ import phoenixit.education.services.ClassNodeService;
 import phoenixit.education.services.ModelNodeService;
 import phoenixit.education.services.ModelNodeServiceImpl;
 
+import java.util.List;
+
 @Slf4j
 @SpringBootTest
 class EducationModelLinkApiApplicationTests {
 
-//	private ModelNodeService modelNodeService;
-//	private ClassNodeService classNodeService;
+	private ModelNodeService modelNodeService;
+	private ClassNodeService classNodeService;
 
 	@Test
 	void contextLoads() {
@@ -35,14 +38,31 @@ class EducationModelLinkApiApplicationTests {
 //		modelLinkMessage.setClassNodeId(classNode.getId());
 //		//modelNodeService.create(modelLinkMessage);
 //	}
+	@Test
+	void fetchModelsByClassNodeIdTest() {
+		List<Long> list = modelNodeService.fetchModelsByClassNodeId(84354L);
+		for (Long id : list) {
+			System.out.println(id);
+		}
+	}
 
-//	@Autowired
-//	public void setModelNodeService(ModelNodeService modelNodeService) {
-//		this.modelNodeService = modelNodeService;
-//	}
-//
-//	@Autowired
-//	public void setClassNodeService(ClassNodeService classNodeService) {
-//		this.classNodeService = classNodeService;
-//	}
+	@Test
+	void fetchByClassNodeId() throws ClassNodeNotFoundException {
+		System.out.println(classNodeService.fetchByNodeId(84354L));
+	}
+
+	@Test
+	void fetchByModelNodeId() throws ModelNodeNotFoundException {
+		System.out.println(modelNodeService.fetchByNodeId(84529L));
+	}
+
+	@Autowired
+	public void setModelNodeService(ModelNodeService modelNodeService) {
+		this.modelNodeService = modelNodeService;
+	}
+
+	@Autowired
+	public void setClassNodeService(ClassNodeService classNodeService) {
+		this.classNodeService = classNodeService;
+	}
 }

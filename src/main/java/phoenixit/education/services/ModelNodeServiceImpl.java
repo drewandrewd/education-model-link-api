@@ -10,6 +10,7 @@ import phoenixit.education.models.ModelNode;
 import phoenixit.education.repositories.ClassRepository;
 import phoenixit.education.repositories.ModelRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -70,6 +71,25 @@ public class ModelNodeServiceImpl implements ModelNodeService {
     public void delete(Long id) throws ModelNodeNotFoundException {
         Optional<ModelNode> modelNode = modelRepository.findById(id);
         modelRepository.delete(modelNode.orElseThrow(ModelNodeNotFoundException::new));
+    }
+
+
+    @Override
+    public boolean fetchByNodeId(Long id) {
+        boolean result = true;
+        try {
+            modelRepository.findById(id).get();
+        } catch (Exception e) {
+            result = false;
+        } finally {
+            return result;
+        }
+    }
+
+    @Override
+    public List<Long> fetchModelsByClassNodeId(Long classNodeId) {
+        List<Long> modelNodeIds = modelRepository.findByClassNode(classNodeId);
+        return modelNodeIds;
     }
 
     @Autowired

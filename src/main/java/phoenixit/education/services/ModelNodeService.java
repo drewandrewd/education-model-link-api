@@ -1,11 +1,11 @@
 package phoenixit.education.services;
 
-import org.springframework.stereotype.Service;
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
 import phoenixit.education.exceptions.ModelNodeNotFoundException;
-import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
+
+import java.util.List;
 
 public interface  ModelNodeService {
 
@@ -16,4 +16,9 @@ public interface  ModelNodeService {
     void update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException;
 
     void delete(Long id) throws ModelNodeNotFoundException;
+
+    boolean fetchByNodeId(Long id);
+
+    List<Long> fetchModelsByClassNodeId(Long classNodeId);
+
 }
