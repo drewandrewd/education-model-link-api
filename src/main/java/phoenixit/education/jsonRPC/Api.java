@@ -8,6 +8,8 @@ import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
 
+import java.util.List;
+
 @JsonRpcService("/api/v1/modelLink.json")
 public interface Api {
     //todo clear code
@@ -24,4 +26,10 @@ public interface Api {
     void update(@JsonRpcParam(value = "modelLink") ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException;
 
     void modelDelete(@JsonRpcParam(value = "modelId") Long id) throws ModelNodeNotFoundException;
+
+    boolean fetchByClassNodeId(@JsonRpcParam(value = "classId") Long id) throws ClassNodeNotFoundException;
+
+    boolean fetchByModelNodeId(@JsonRpcParam(value = "modelId") Long id) throws ModelNodeNotFoundException;
+
+    List<Long> fetchModelsByClassNodeId(@JsonRpcParam(value = "classId") Long id) throws ClassNodeNotFoundException;
 }

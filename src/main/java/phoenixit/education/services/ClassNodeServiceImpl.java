@@ -56,6 +56,18 @@ public class ClassNodeServiceImpl implements ClassNodeService {
         }
     }
 
+    @Override
+    public boolean fetchByNodeId(Long id) {
+        boolean result = true;
+        try {
+            ClassNode classNode = repository.findById(id).get();
+        } catch (Exception e) {
+            result = false;
+        } finally {
+            return result;
+        }
+    }
+
     @Autowired
     public void setRepository(ClassRepository repository) {
         this.repository = repository;
