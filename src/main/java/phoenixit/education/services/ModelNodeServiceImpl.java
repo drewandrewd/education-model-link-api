@@ -40,6 +40,7 @@ public class ModelNodeServiceImpl implements ModelNodeService {
         }
     }
 
+
     @Override
     public void update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException {
         //todo get model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
