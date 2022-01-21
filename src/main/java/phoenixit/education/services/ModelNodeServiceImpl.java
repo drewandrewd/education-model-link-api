@@ -19,6 +19,7 @@ public class ModelNodeServiceImpl implements ModelNodeService {
     private ModelRepository modelRepository;
     private ClassRepository classRepository;
 
+    //todo make fetchByNodeId from findById
     @Override
     public ModelNode findById(ModelLinkMessage modelLinkMessage) {
         return null;
@@ -74,7 +75,7 @@ public class ModelNodeServiceImpl implements ModelNodeService {
         modelRepository.delete(modelNode.orElseThrow(ModelNodeNotFoundException::new));
     }
 
-
+//todo delete
     @Override
     public boolean fetchByNodeId(Long id) {
         boolean result = true;
@@ -89,6 +90,7 @@ public class ModelNodeServiceImpl implements ModelNodeService {
 
     @Override
     public List<Long> fetchModelsByClassNodeId(Long classNodeId) {
+        //todo check classNodeId.isPresent
         List<Long> modelNodeIds = modelRepository.findByClassNode(classNodeId);
         return modelNodeIds;
     }

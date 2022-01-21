@@ -13,7 +13,7 @@ public class ClassNodeServiceImpl implements ClassNodeService {
 
     private ClassRepository repository;
 
-    //todo findById
+    //todo fix findById (21)
     @Override
     public ClassNode findById(Long id) throws ClassNodeNotFoundException {
         Optional<ClassNode> classNode = repository.findById(id);
@@ -56,6 +56,7 @@ public class ClassNodeServiceImpl implements ClassNodeService {
         }
     }
 
+    //todo delete
     @Override
     public boolean fetchByNodeId(Long id) {
         boolean result = true;
