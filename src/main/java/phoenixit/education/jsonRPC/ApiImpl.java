@@ -51,12 +51,12 @@ public class ApiImpl implements Api{
     }
 
     @Override
-    public boolean fetchByClassNodeId(Long id) throws ClassNodeNotFoundException {
+    public ClassNode fetchByClassNodeId(Long id) throws ClassNodeNotFoundException {
         return classNodeService.fetchByNodeId(id);
     }
 
     @Override
-    public boolean fetchByModelNodeId(Long id) throws ModelNodeNotFoundException {
+    public ModelNode fetchByModelNodeId(Long id) throws ModelNodeNotFoundException {
         return modelNodeService.fetchByNodeId(id);
     }
 

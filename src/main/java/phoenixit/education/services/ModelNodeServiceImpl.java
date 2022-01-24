@@ -19,16 +19,19 @@ public class ModelNodeServiceImpl implements ModelNodeService {
     private ModelRepository modelRepository;
     private ClassRepository classRepository;
 
-    //todo make fetchByNodeId from findById
     @Override
-    public ModelNode findById(ModelLinkMessage modelLinkMessage) {
-        return null;
+    public ModelNode fetchByNodeId(Long modelNodeId) throws ModelNodeNotFoundException {
+        Optional<ModelNode> model = modelRepository.findById(modelNodeId);
+        if (model.isPresent()) {
+            ModelNode modelNode = model.get();
+            return modelNode;
+        } else {
+            throw new ModelNodeNotFoundException();
+        }
     }
 
     @Override
     public Long create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException {
-        //todo add model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
-        //todo find classNode by classNodeId -> set classnode to modelnode and save
         Optional<ClassNode> classNode = classRepository.findById(modelLinkMessage.getClassNodeId());
         if (classNode.isPresent()) {
             ModelNode modelNode = new ModelNode();
@@ -44,13 +47,10 @@ public class ModelNodeServiceImpl implements ModelNodeService {
 
     @Override
     public void update(ModelLinkMessage modelLinkMessage) throws ModelNodeNotFoundException, ClassNodeNotFoundException {
-        //todo get model: ModelLinkMessage(Long modelNodeId, String modelTitle, Long classNodeId)
         Optional<ModelNode> current = modelRepository.findById(modelLinkMessage.getModelNodeId());
         String newTitle = modelLinkMessage.getModelNodeTitle();
         Long newClassNodeId = modelLinkMessage.getClassNodeId();
-        //todo find classNode by classNodeId, check and compare with old value -> change if it different
         if (current.isPresent()) {
-            //todo classNode.isPresent check
             ModelNode oldModel = current.get();
             Optional<ClassNode> newClassNode = classRepository.findById(newClassNodeId);
             if (!newTitle.equals(oldModel.getTitle())) {
@@ -75,24 +75,15 @@ public class ModelNodeServiceImpl implements ModelNodeService {
         modelRepository.delete(modelNode.orElseThrow(ModelNodeNotFoundException::new));
     }
 
-//todo delete
     @Override
-    public boolean fetchByNodeId(Long id) {
-        boolean result = true;
-        try {
-            modelRepository.findById(id).get();
-        } catch (Exception e) {
-            result = false;
-        } finally {
-            return result;
+    public List<Long> fetchModelsByClassNodeId(Long classNodeId) throws ClassNodeNotFoundException {
+        Optional<ClassNode> current = classRepository.findById(classNodeId);
+        if(current.isPresent()) {
+            List<Long> modelNodeIds = modelRepository.findByClassNode(classNodeId);
+            return modelNodeIds;
+        } else {
+            throw new ClassNodeNotFoundException();
         }
-    }
-
-    @Override
-    public List<Long> fetchModelsByClassNodeId(Long classNodeId) {
-        //todo check classNodeId.isPresent
-        List<Long> modelNodeIds = modelRepository.findByClassNode(classNodeId);
-        return modelNodeIds;
     }
 
     @Autowired

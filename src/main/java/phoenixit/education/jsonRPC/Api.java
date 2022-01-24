@@ -27,9 +27,9 @@ public interface Api {
 
     void modelDelete(@JsonRpcParam(value = "modelId") Long id) throws ModelNodeNotFoundException;
 
-    boolean fetchByClassNodeId(@JsonRpcParam(value = "classId") Long id) throws ClassNodeNotFoundException;
+    ClassNode fetchByClassNodeId(@JsonRpcParam(value = "classId") Long id) throws ClassNodeNotFoundException;
 
-    boolean fetchByModelNodeId(@JsonRpcParam(value = "modelId") Long id) throws ModelNodeNotFoundException;
+    ModelNode fetchByModelNodeId(@JsonRpcParam(value = "modelId") Long id) throws ModelNodeNotFoundException;
 
     List<Long> fetchModelsByClassNodeId(@JsonRpcParam(value = "classId") Long id) throws ClassNodeNotFoundException;
 }

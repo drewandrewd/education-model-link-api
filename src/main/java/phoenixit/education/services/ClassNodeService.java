@@ -5,7 +5,7 @@ import phoenixit.education.models.ClassNode;
 
 public interface ClassNodeService {
 
-    ClassNode findById(Long id) throws ClassNodeNotFoundException;
+    ClassNode fetchByNodeId(Long id) throws ClassNodeNotFoundException;
 
     ClassNode create(ClassNode classNode);
 
@@ -13,5 +13,4 @@ public interface ClassNodeService {
 
     ClassNode delete(Long id) throws ClassNodeNotFoundException;
 
-    boolean fetchByNodeId(Long id) throws ClassNodeNotFoundException;
 }

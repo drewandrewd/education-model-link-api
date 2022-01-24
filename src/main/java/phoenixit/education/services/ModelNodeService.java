@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface  ModelNodeService {
 
-    ModelNode findById(ModelLinkMessage modelLinkMessage);
+    ModelNode fetchByNodeId(Long modelNodeId) throws ModelNodeNotFoundException;
 
     Long create(ModelLinkMessage modelLinkMessage) throws ClassNodeNotFoundException;
 
@@ -17,8 +17,6 @@ public interface  ModelNodeService {
 
     void delete(Long id) throws ModelNodeNotFoundException;
 
-    boolean fetchByNodeId(Long id);
-
-    List<Long> fetchModelsByClassNodeId(Long classNodeId);
+    List<Long> fetchModelsByClassNodeId(Long classNodeId) throws ClassNodeNotFoundException;
 
 }

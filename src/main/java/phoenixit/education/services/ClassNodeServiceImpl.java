@@ -13,12 +13,11 @@ public class ClassNodeServiceImpl implements ClassNodeService {
 
     private ClassRepository repository;
 
-    //todo fix findById (21)
     @Override
-    public ClassNode findById(Long id) throws ClassNodeNotFoundException {
+    public ClassNode fetchByNodeId(Long id) throws ClassNodeNotFoundException {
         Optional<ClassNode> classNode = repository.findById(id);
         if (classNode.isPresent()) {
-            return repository.save(classNode.get());
+            return classNode.get();
         } else {
             throw new ClassNodeNotFoundException();
         }
@@ -43,29 +42,15 @@ public class ClassNodeServiceImpl implements ClassNodeService {
             throw new ClassNodeNotFoundException();
         }
     }
-    //
+
     @Override
     public ClassNode delete(Long id) throws ClassNodeNotFoundException {
         Optional<ClassNode> classNode = repository.findById(id);
-        //todo classNode.isPresent check
         if (classNode.isPresent()) {
             repository.delete(classNode.get());
             return classNode.get();
         } else {
             throw new ClassNodeNotFoundException();
-        }
-    }
-
-    //todo delete
-    @Override
-    public boolean fetchByNodeId(Long id) {
-        boolean result = true;
-        try {
-            ClassNode classNode = repository.findById(id).get();
-        } catch (Exception e) {
-            result = false;
-        } finally {
-            return result;
         }
     }
 

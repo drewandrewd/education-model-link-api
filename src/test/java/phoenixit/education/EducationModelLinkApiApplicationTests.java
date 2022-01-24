@@ -39,7 +39,7 @@ class EducationModelLinkApiApplicationTests {
 //		//modelNodeService.create(modelLinkMessage);
 //	}
 	@Test
-	void fetchModelsByClassNodeIdTest() {
+	void fetchModelsByClassNodeIdTest() throws ClassNodeNotFoundException {
 		List<Long> list = modelNodeService.fetchModelsByClassNodeId(84354L);
 		for (Long id : list) {
 			System.out.println(id);
