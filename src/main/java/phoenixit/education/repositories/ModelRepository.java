@@ -16,4 +16,7 @@ public interface ModelRepository extends Neo4jRepository<ModelNode, Long> {
 
     @Query("MATCH (n:Class)<-[:CLASS]-(m:Model) WHERE id(n) = $classNodeId RETURN id(m)")
     List<Long> findByClassNode(Long classNodeId);
+
+    @Query("MATCH (m:Model), (c:Class) WHERE id(m) = $modelNodeId AND id(c) = $classNodeId CREATE (m)-[:CLASS]->(c)")
+    void makeRelations(Long modelNodeId, Long classNodeId);
 }
