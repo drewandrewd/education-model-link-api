@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
 import phoenixit.education.exceptions.ModelNodeNotFoundException;
+import phoenixit.education.models.ClassLinkMessage;
 import phoenixit.education.models.ClassNode;
 import phoenixit.education.models.ModelLinkMessage;
 import phoenixit.education.models.ModelNode;
@@ -21,18 +22,18 @@ public class ApiImpl implements Api{
     private ClassNodeService classNodeService;
 
     @Override
-    public ClassNode create(ClassNode classNode) {
-        return classNodeService.create(classNode);
+    public Long classCreate(ClassLinkMessage classLinkMessage) {
+        return classNodeService.create(classLinkMessage);
     }
 
     @Override
-    public ClassNode update(ClassNode classNode) throws ClassNodeNotFoundException {
-        return classNodeService.update(classNode);
+    public void classUpdate(ClassLinkMessage classLinkMessage) throws ClassNodeNotFoundException {
+        classNodeService.update(classLinkMessage);
     }
 
     @Override
-    public ClassNode classDelete(Long id) throws ClassNodeNotFoundException {
-        return classNodeService.delete(id);
+    public void classDelete(Long id) throws ClassNodeNotFoundException {
+        classNodeService.delete(id);
     }
 
     @Override

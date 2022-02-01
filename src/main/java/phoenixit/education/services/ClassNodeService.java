@@ -1,16 +1,17 @@
 package phoenixit.education.services;
 
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
+import phoenixit.education.models.ClassLinkMessage;
 import phoenixit.education.models.ClassNode;
 
 public interface ClassNodeService {
 
     ClassNode fetchByNodeId(Long id) throws ClassNodeNotFoundException;
 
-    ClassNode create(ClassNode classNode);
+    Long create(ClassLinkMessage classLinkMessage);
 
-    ClassNode update(ClassNode classNode) throws ClassNodeNotFoundException;
+    void update(ClassLinkMessage classLinkMessage) throws ClassNodeNotFoundException;
 
-    ClassNode delete(Long id) throws ClassNodeNotFoundException;
+    void delete(Long id) throws ClassNodeNotFoundException;
 
 }
