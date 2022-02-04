@@ -36,8 +36,8 @@ public class ModelNodeServiceImpl implements ModelNodeService {
         if (classNode.isPresent()) {
             ModelNode modelNode = new ModelNode();
             modelNode.setTitle(modelLinkMessage.getModelNodeTitle());
-            modelRepository.makeRelations(modelLinkMessage.getModelNodeId(), modelLinkMessage.getClassNodeId());
             modelRepository.save(modelNode);
+            modelRepository.makeRelations(modelNode.getId(), modelLinkMessage.getClassNodeId());
             return modelNode.getId();
         } else {
             throw new ClassNodeNotFoundException();

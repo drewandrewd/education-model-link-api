@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import phoenixit.education.exceptions.ClassNodeNotFoundException;
 import phoenixit.education.models.ClassLinkMessage;
 import phoenixit.education.models.ClassNode;
-import phoenixit.education.models.ModelNode;
 import phoenixit.education.repositories.ClassRepository;
 
 import java.util.Optional;
